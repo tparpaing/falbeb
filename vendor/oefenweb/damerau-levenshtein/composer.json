@@ -1,0 +1,43 @@
+{
+	"name": "oefenweb/damerau-levenshtein",
+	"description": "Get text similarity level with Damerau-Levenshtein distance",
+	"type": "library",
+	"keywords": [
+		"damerau", "levenshtein", "distance", "similarity"
+	],
+	"homepage": "http://github.com/Oefenweb/damerau-levenshtein",
+	"license": "MIT",
+	"authors": [{
+			"name": "Ph4r05",
+			"homepage": "http://www.phpclasses.org/package/7021-PHP-Get-text-similarity-level-with-Damerau-Levenshtein.html"
+		}, {
+			"name": "Oefenweb.nl BV team",
+			"homepage": "https://github.com/Oefenweb/damerau-levenshtein/contributors"
+		}
+	],
+	"require": {
+		"php": ">=7.1.0",
+		"ext-mbstring": "*"
+	},
+	"require-dev": {
+		"oefenweb/cakephp-codesniffer": "^2.0",
+		"phpmd/phpmd": "^2.0",
+		"sebastian/phpcpd": "^4.0",
+		"phpunit/phpunit": "^7.5",
+		"phpstan/phpstan": "^0.12.66"
+	},
+	"support": {
+		"issues": "https://github.com/Oefenweb/damerau-levenshtein/issues",
+		"source": "https://github.com/Oefenweb/damerau-levenshtein"
+	},
+	"autoload": {
+		"psr-4": {
+			"Oefenweb\\DamerauLevenshtein\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Oefenweb\\DamerauLevenshtein\\Test\\": "tests"
+		}
+	}
+}

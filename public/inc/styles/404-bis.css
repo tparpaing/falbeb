@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900");
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    background-color: #09334f;
+    position: relative;
+}
+
+#yetiSVG {
+    width: 600px;
+    height: 470px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+#lightSVG {
+    width: 600px;
+    height: 470px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+}
+
+.content {
+    padding: 5rem 3rem 0 25rem;
+    position: relative;
+    z-index: 10;
+    font-family: "Source Sans Pro", sans-serif;
+    color: #fff;
+    left: 50px;
+    max-width: calc(100% - 600px);
+}
+
+.content h3 {
+    margin: 0 0 0.8rem;
+    font-size: 2.625rem;
+    font-weight: 900;
+    line-height: 110%;
+}
+
+.content p {
+    font-size: 1.25rem;
+    font-weight: normal;
+    line-height: 125%;
+    color: #d1e2ed;
+}
+
+.content .stroke {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.content .link,
+.content .link:visited {
+    display: inline-block;
+    background-color: #3a7199;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    border: 2px solid #3a7199;
+    border-radius: 20px;
+    margin: 5px;
+    transition: all .4s;
+}
+
+.content .link:hover {
+    background-color: rgba(58, 113, 153, .2);
+    color: #3a7199;
+}
+
+@media screen and (max-width: 1200px) {
+    .content {
+        padding: 5rem 3rem 0 20rem;
+        left: 50px;
+        top: -50px;
+        max-width: calc(100% - 400px);
+    }
+
+    .content h3 {
+        margin: 0 0 0.5rem;
+        font-size: 2rem;
+        line-height: 100%;
+    }
+
+    .content p {
+        font-size: 1rem;
+        line-height: 110%;
+    }
+
+    #yetiSVG {
+        width: 415px;
+        height: 325px;
+    }
+
+    #lightSVG {
+        width: 415px;
+        height: 325px;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+    .content {
+        display: block;
+        position: absolute;
+        padding: 2rem 3rem;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(50%);
+        min-width: calc(100% - 10rem);
+        background-color: rgba(9, 51, 79, 0.8);
+        border-radius: 20px;
+    }
+
+    .content h3 {
+        margin: 0 0 0.4rem;
+        font-size: 2rem;
+        line-height: 110%;
+    }
+
+    .content p {
+        font-size: 1rem;
+        line-height: 125%;
+    }
+
+    #yetiSVG {
+        --heightA: 100vw;
+        --heightB: calc(var(--heightA) * 470px);
+        --heightC: calc(var(--heightB) / 600px);
+        width: 100vw;
+        height: var(--heightC);
+    }
+
+    #lightSVG {
+        --heightA: 100vw;
+        --heightB: calc(var(--heightA) * 470px);
+        --heightC: calc(var(--heightB) / 600px);
+        width: 100vw;
+        height: var(--heightC);
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .content h3 {
+        margin: 0 0 0.3rem;
+        font-size: 1.5rem;
+        line-height: 100%;
+    }
+
+    .content p {
+        font-size: 0.8rem;
+        line-height: 100%;
+    }
+}
