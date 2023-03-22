@@ -92,7 +92,7 @@ class RendererMiddleware implements MiddlewareInterface
 
             return $response
                 ->withStatus(404)
-                ->withBody(Utils::streamFor($this->renderer->render('404-bis', $addParam)));
+                ->withBody(Utils::streamFor($this->renderer->render('404', $addParam)));
         }
 
         return $response->withBody(Utils::streamFor($this->renderer->render($view, $params)));
