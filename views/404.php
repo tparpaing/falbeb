@@ -8,7 +8,7 @@ echo $renderer->render(
         'params' => [
             'no_nav' => true,
             'no_container' => true,
-            'styles' => ['404-bis.css'],
+            'styles' => ['404.css'],
             'scripts' => [
                 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js',
                 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase.min.js',
