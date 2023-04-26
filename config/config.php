@@ -10,8 +10,8 @@ use Framework\Renderer\PHPRendererFactory;
 
 return [
     'database.host' => 'localhost',
-    'database.username' => 'root',
-    'database.password' => '',
+    'database.username' => 'phpmyadmin',
+    'database.password' => 'root',
     'database.name' => 'falbeb',
     'views.path' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views',
     'routesToAdd' => [
