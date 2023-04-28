@@ -2,6 +2,7 @@
 
 namespace Framework\Middleware;
 
+use App\Auth\AuthModule;
 use PDO;
 use Framework\App;
 use GuzzleHttp\Psr7\Utils;
@@ -102,11 +103,13 @@ class RendererMiddleware implements MiddlewareInterface
     {
         $acc = [];
         foreach ($this->modules as $k => $v) {
-            $acc[] = [
-                'name' => substr($k, 1),
-                'baseRoute' => $v['baseRoute'],
-                'displayName' => $v['displayName']
-            ];
+            if ($k !== '@auth') {
+                $acc[] = [
+                    'name' => substr($k, 1),
+                    'baseRoute' => $v['baseRoute'],
+                    'displayName' => $v['displayName']
+                ];
+            }
         }
         return $acc;
     }

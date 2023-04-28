@@ -11,7 +11,6 @@ class ComposerStaticInit5d3db09c6feb3751f78dba7a880b6e64
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '72142d7b40a3a0b14e91825290b5ad82' => __DIR__ . '/..' . '/cakephp/core/functions.php',
         '3f8ee9969da604d0f15c841b77b11450' => __DIR__ . '/..' . '/laminas/laminas-stratigility/src/functions/double-pass-middleware.php',
         'ee5523a5d51d6d51030227439db1ef74' => __DIR__ . '/..' . '/laminas/laminas-stratigility/src/functions/host.php',
         '5f6e29ca023a0bdefa2476adb465d527' => __DIR__ . '/..' . '/laminas/laminas-stratigility/src/functions/middleware.php',
@@ -20,19 +19,19 @@ class ComposerStaticInit5d3db09c6feb3751f78dba7a880b6e64
         '9ad95be8d1f1c62e52cb995973bf5246' => __DIR__ . '/..' . '/laminas/laminas-stratigility/src/functions/host.legacy.php',
         '44f5a19d6d262baf7ab55c8a8bb56f5a' => __DIR__ . '/..' . '/laminas/laminas-stratigility/src/functions/middleware.legacy.php',
         'dd89a2771fc24829c6aade9a7786bd8f' => __DIR__ . '/..' . '/laminas/laminas-stratigility/src/functions/path.legacy.php',
-        '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        '72142d7b40a3a0b14e91825290b5ad82' => __DIR__ . '/..' . '/cakephp/core/functions.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '6f2c5977e422114bbaec553e7c77ee8b' => __DIR__ . '/..' . '/http-interop/response-sender/src/functions.php',
+        'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
         '12015786a5f2990d4244c42435db1ba0' => __DIR__ . '/..' . '/mezzio/mezzio/src/constants.php',
         '792a652af1b56b529053947cf6432b79' => __DIR__ . '/..' . '/mezzio/mezzio/src/constants.legacy.php',
-        'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -47,7 +46,6 @@ class ComposerStaticInit5d3db09c6feb3751f78dba7a880b6e64
         ),
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
@@ -148,10 +146,6 @@ class ComposerStaticInit5d3db09c6feb3751f78dba7a880b6e64
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
-        'Symfony\\Polyfill\\Php81\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
-        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -202,13 +196,13 @@ class ComposerStaticInit5d3db09c6feb3751f78dba7a880b6e64
         ),
         'Psr\\Http\\Server\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-server-handler/src',
-            1 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
+            0 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
+            1 => __DIR__ . '/..' . '/psr/http-server-handler/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -272,8 +266,8 @@ class ComposerStaticInit5d3db09c6feb3751f78dba7a880b6e64
         ),
         'Mezzio\\Router\\' => 
         array (
-            0 => __DIR__ . '/..' . '/mezzio/mezzio-fastroute/src',
-            1 => __DIR__ . '/..' . '/mezzio/mezzio-router/src',
+            0 => __DIR__ . '/..' . '/mezzio/mezzio-router/src',
+            1 => __DIR__ . '/..' . '/mezzio/mezzio-fastroute/src',
         ),
         'Mezzio\\' => 
         array (
@@ -785,7 +779,6 @@ class ComposerStaticInit5d3db09c6feb3751f78dba7a880b6e64
         'PharIo\\Version\\VersionConstraintValue' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintValue.php',
         'PharIo\\Version\\VersionNumber' => __DIR__ . '/..' . '/phar-io/version/src/VersionNumber.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
-        'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
         'SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/OptionDoesNotAllowArgumentException.php',

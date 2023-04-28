@@ -11,6 +11,7 @@ use Pagerfanta\Adapter\AdapterInterface;
  * Adapter which calculates pagination from a Doctrine ORM Query or QueryBuilder.
  *
  * @template T
+ *
  * @implements AdapterInterface<T>
  */
 class QueryAdapter implements AdapterInterface
@@ -63,7 +64,7 @@ class QueryAdapter implements AdapterInterface
      * @phpstan-param int<0, max> $offset
      * @phpstan-param int<0, max> $length
      *
-     * @phpstan-return \ArrayIterator<array-key, T>
+     * @return \Traversable<array-key, T>
      */
     public function getSlice(int $offset, int $length): iterable
     {

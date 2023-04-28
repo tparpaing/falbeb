@@ -130,12 +130,6 @@ nav .menu .menu_links:hover .link {
     opacity: 1;
 }
 
-@media screen and (max-width: 1370px) {
-    nav .menu .menu_links {
-        display: none;
-    }
-}
-
 nav .menu .menu_links .link {
     color: white;
     opacity: 0.5;
@@ -187,10 +181,88 @@ nav .menu .menu_icon {
     cursor: pointer;
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 1370px) {
     nav .menu .menu_icon {
         display: flex;
     }
+    
+    nav .menu .menu_links {
+        display: none;
+    }
+
+    nav .menu[data-opened=true] .menu_links {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 100vh;
+        padding: 30px;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        background-color: #695681;
+        z-index: 1;
+    }
+
+    nav .menu[data-opened=true] .menu_links .link {
+        display: block;
+        margin: 25px 0;
+    }
+
+    nav .menu[data-opened=true] .menu_links:hover .link {
+        opacity: 0.5;
+    }
+
+    nav .menu[data-opened=true] .menu_links:hover .link.link-active,
+    nav .menu[data-opened=true] .menu_links .link:hover {
+        opacity: 1;
+    }
+
+    nav .menu[data-opened=true] .menu_links .close_icon {
+        display: flex;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        top: 20px;
+        right: 65px;
+    }
+
+    nav .menu[data-opened=true] .menu_links .close_icon .icon {
+        width: 24px;
+        height: 2px;
+        background: white;
+        position: absolute;
+        transform: rotate(45deg);
+        transition: all 0.3s cubic-bezier(0.49, 0.04, 0, 1.55);
+    }
+
+    nav .menu[data-opened=true] .menu_links .close_icon .icon:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        position: absolute;
+        transform: rotate(90deg);
+        transition: all 0.3s cubic-bezier(0.49, 0.04, 0, 1.55);
+    }
+
+    nav .menu[data-opened=true] .menu_links .close_icon:hover .icon {
+        background: #FFEDC0;
+        transform: rotate(135deg);
+    }
+
+    nav .menu[data-opened=true] .menu_links .close_icon:hover .icon:before {
+        transform: rotate(90deg)
+    }
+}
+
+nav .menu .menu_links .close_icon {
+    display: none;
 }
 
 nav .menu .menu_icon .icon {
@@ -314,6 +386,11 @@ section.cards .course-preview a {
     opacity: 0.6;
     margin-top: 30px;
     text-decoration: none;
+}
+
+section.cards .course-preview a.linktoprofile {
+    margin: 0;
+    text-decoration: underlines;
 }
 
 section.cards .course-info {

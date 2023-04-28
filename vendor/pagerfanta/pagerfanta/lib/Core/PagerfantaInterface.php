@@ -11,6 +11,7 @@ use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 
 /**
  * @template-covariant T
+ *
  * @extends \IteratorAggregate<T>
  */
 interface PagerfantaInterface extends \Countable, \IteratorAggregate
@@ -60,7 +61,7 @@ interface PagerfantaInterface extends \Countable, \IteratorAggregate
     public function getCurrentPage(): int;
 
     /**
-     * @phpstan-return iterable<array-key, T>
+     * @return iterable<array-key, T>
      */
     public function getCurrentPageResults(): iterable;
 

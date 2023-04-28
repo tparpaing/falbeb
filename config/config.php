@@ -36,7 +36,7 @@ return [
             'methods' => ['GET'],
             'levenstein' => [
                 'enabled' => true,
-                'action_text' => 'aller sur le page Coming Soon'
+                'action_text' => 'aller sur la page Coming Soon'
             ]
         ]
     ],

@@ -8,10 +8,14 @@ use Pagerfanta\RouteGenerator\RouteGeneratorInterface;
 
 abstract class Template implements TemplateInterface
 {
+    /**
+     * @var array<string, mixed>
+     */
     private array $options;
 
     /**
      * @var callable|RouteGeneratorInterface|null
+     *
      * @phpstan-var callable(int $page): string|RouteGeneratorInterface|null
      */
     private $routeGenerator;
@@ -25,6 +29,7 @@ abstract class Template implements TemplateInterface
      * Sets the route generator used while rendering the template.
      *
      * @param callable|RouteGeneratorInterface $routeGenerator
+     *
      * @phpstan-param callable(int $page): string|RouteGeneratorInterface $routeGenerator
      */
     public function setRouteGenerator(callable $routeGenerator): void
@@ -34,6 +39,8 @@ abstract class Template implements TemplateInterface
 
     /**
      * Sets the options for the template, overwriting keys that were previously set.
+     *
+     * @param array<string, mixed> $options
      */
     public function setOptions(array $options): void
     {
@@ -50,6 +57,9 @@ abstract class Template implements TemplateInterface
         return $generator($page);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getDefaultOptions(): array
     {
         return [];

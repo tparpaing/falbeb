@@ -26,7 +26,7 @@ class AuthTable
                 users.pk_id as id,
                 users.email,
                 users.login,
-                users.password,
+                users.role,
                 users.fk_membre,
                 membres.nom,
                 membres.prenom,
@@ -58,8 +58,7 @@ class AuthTable
      */
     private function validateUserLogin(string $email, string $password): ?int
     {
-        $req = $this->pdo->prepare('SELECT pk_id,password FROM users WHERE email = ?
-        ');
+        $req = $this->pdo->prepare('SELECT pk_id,password FROM users WHERE email = ?');
         $req->execute([$email]);
         if ($req->rowCount() === 1) {
             $res = $req->fetch();

@@ -5,7 +5,7 @@
         <div class="courses-container">
             <div class="course">
                 <div class="course-preview">
-                    <h6 class="authors"><?= $authors[$p->pk_id] ?></h6>
+                    <h6 class="authors"><?= $authors[$p->pk_id] ?></a></h6>
                     <h3><?= $p->titre ?></h3>
                     <a href="<?= $router->generateUri('paillardes.show', ['id' => $p->pk_id]) ?>">Lire la paillarde
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

@@ -42,7 +42,7 @@ class PaillardesTable
      */
     public function getAuthors(int $p): array
     {
-        $req = $this->pdo->prepare('SELECT m.nom, m.prenom, m.surnom FROM paillardes_auteurs AS pa JOIN membres AS m ON pa.fk_auteur = m.pk_id WHERE pa.fk_paillarde = ? ');
+        $req = $this->pdo->prepare('SELECT m.pk_id, m.nom, m.prenom, m.surnom FROM paillardes_auteurs AS pa JOIN membres AS m ON pa.fk_auteur = m.pk_id WHERE pa.fk_paillarde = ? ');
         $req->execute([$p]);
         return $req->fetchAll();
     }

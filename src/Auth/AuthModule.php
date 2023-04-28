@@ -6,6 +6,7 @@ use Framework\App;
 use Framework\Module;
 use GuzzleHttp\Psr7\Utils;
 use App\Auth\Table\AuthTable;
+use Exception;
 use Mezzio\Router\FastRouteRouter;
 use Psr\Http\Message\ResponseInterface;
 use Framework\Renderer\RendererInterface;
@@ -44,7 +45,7 @@ class AuthModule extends Module
     {
         $success = false;
         $user = null;
-        if ($request->getMethod() === "POST") {
+        if ($request->getMethod() === "POST" && !App::loggedIn()) {
             $post = $request->getParsedBody();
             $errors = [];
 
@@ -77,14 +78,14 @@ class AuthModule extends Module
             if (empty($errors)) {
                 $user = $this->authTable->find($email, $password);
                 if ($user != null) {
-                    App::debug($user, 1, "User");
+                    $_SESSION['auth'] = $user;
                     $success = true;
                 }
             }
         }
 
-        $this->renderer->addGlobal('success', $success);
         $this->renderer->addGlobal('user', $user);
+        $this->renderer->addGlobal('success', $success);
         $this->renderer->addGlobal('errors', $errors ?? []);
         if (!isset($email) || empty($errors)) {
             $this->renderer->addGlobal('email', '');
@@ -93,6 +94,11 @@ class AuthModule extends Module
         }
 
         $response = $handler->handle($request);
+        if ($success) {
+            return $response
+                ->withStatus(200)
+                ->withHeader('Location', $this->router->generateUri('profile.index'));
+        }
         return $response;
     }
 
@@ -110,6 +116,18 @@ class AuthModule extends Module
                 ->withBody(Utils::streamFor((string)$this->renderer->getGlobal('errors')));
         }
         return $response;
+    }
+
+    public function logout(array $params, ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        if (App::loggedIn()) {
+            $_SESSION['auth'] = null;
+        }
+
+        $response = $handler->handle($request);
+        return $response
+            ->withStatus(303)
+            ->withHeader('Location', $this->router->generateUri('auth.login'));;
     }
 
     /**

@@ -26,6 +26,12 @@ return [
             'name' => 'auth.login.post'
         ],
         [
+            'path' => '/logout',
+            'name' => 'auth.logout',
+            'methods' => ['GET'],
+            'name' => 'auth.logout'
+        ],
+        [
             'path' => '/register',
             'name' => 'auth.register',
             'methods' => ['GET'],

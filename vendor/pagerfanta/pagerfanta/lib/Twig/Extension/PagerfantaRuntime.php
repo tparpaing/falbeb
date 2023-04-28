@@ -23,15 +23,17 @@ final class PagerfantaRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @param PagerfantaInterface<mixed> $pagerfanta
-     * @param string|array|null          $viewName   the view name
+     * @param PagerfantaInterface<mixed>       $pagerfanta
+     * @param string|array<string, mixed>|null $viewName   The name of the view to render, or the options array
+     * @param array<string, mixed>             $options
      *
      * @throws \InvalidArgumentException if the $viewName argument is an invalid type
      */
     public function renderPagerfanta(PagerfantaInterface $pagerfanta, $viewName = null, array $options = []): string
     {
         if (\is_array($viewName)) {
-            [$viewName, $options] = [null, $viewName];
+            $options = $viewName;
+            $viewName = null;
         } elseif (null !== $viewName && !\is_string($viewName)) {
             throw new \InvalidArgumentException(sprintf('The $viewName argument of %s() must be an array, a string, or a null value; %s given.', __METHOD__, get_debug_type($viewName)));
         }
@@ -43,6 +45,7 @@ final class PagerfantaRuntime implements RuntimeExtensionInterface
 
     /**
      * @param PagerfantaInterface<mixed> $pagerfanta
+     * @param array<string, mixed>       $options
      *
      * @throws OutOfRangeCurrentPageException if the page is out of bounds
      */
@@ -57,6 +60,9 @@ final class PagerfantaRuntime implements RuntimeExtensionInterface
         return $routeGenerator($page);
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     private function createRouteGenerator(array $options = []): RouteGeneratorInterface
     {
         return $this->routeGeneratorFactory->create($options);

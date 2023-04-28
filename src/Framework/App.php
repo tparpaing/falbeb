@@ -2,6 +2,7 @@
 
 namespace Framework;
 
+use Exception;
 use PDO;
 use Mezzio\Router\Route;
 use Mezzio\Router\FastRouteRouter;
@@ -39,16 +40,21 @@ class App
 
         foreach ($modules as $k => $m) {
             if (is_array($m)) {
-                $this->modules[$k] = [
-                    'src' => $this->container->get($m['src']),
-                    'baseRoute' => $m['baseRoute'] ?? 'index',
-                    'displayName' => $m['displayName'] ?? substr($k, 1)
-                ];
+                $constraints = $m['constraints'] ?? [];
+                if ($this->verifyConstraints($constraints)) {
+                    $this->modules[$k] = [
+                        'src' => $this->container->get($m['src']),
+                        'baseRoute' => $m['baseRoute'] ?? 'index',
+                        'displayName' => $m['displayName'] ?? substr($k, 1),
+                        'args' => $m['args'] ?? []
+                    ];
+                }
             } else {
                 $this->modules[$k] = [
                     'src' => $this->container->get($m),
                     'baseRoute' => 'index',
-                    'displayName' => substr($k, 1)
+                    'displayName' => substr($k, 1),
+                    'args' => $m['args'] ?? []
                 ];
             }
         }
@@ -120,5 +126,72 @@ class App
     public function getContainer(): ContainerInterface
     {
         return $this->container;
+    }
+
+    /**
+     * Verifies constraints applied to a module
+     * 
+     * @return bool
+     */
+    public static function verifyConstraints(array $constraints): bool
+    {
+        $acc = true;
+        foreach ($constraints as $k => $c) {
+            if ($k === 'login' && $c) {
+                $acc = self::loggedIn();
+                continue;
+            }
+            
+            if ($k === 'perms') {
+                if (self::loggedIn()) {
+                    $acc = (self::getLoggedUserPerm() === $c);
+                }
+                continue;
+            }
+        }
+        return $acc;
+    }
+
+    /**
+     * Tells if the session have a user logged in right now
+     * 
+     * @return bool
+     */
+    public static function loggedIn(): bool
+    {
+        if ($_SESSION['auth'] !== null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the id of a logged-in user
+     */
+    public static function getLoggedUserId(int $mode = 0): int
+    {
+        if (self::loggedIn()) {
+            if ($mode == 0) {
+                return $_SESSION['auth']->id;
+            } else if ($mode = 1) {
+                return $_SESSION['auth']->fk_membre;
+            } else {
+                throw new Exception("Tried to use an unauthorized mode for getLoggedUserId() function");
+            }
+        } else {
+            throw new Exception("Tried to use getLoggedUserId() function while no user was logged-in.");
+        }
+    }
+
+    /**
+     * Returns the permission role of a logged-in user
+     */
+    public static function getLoggedUserPerm(): string
+    {
+        if (self::loggedIn()) {
+            return $_SESSION['auth']->role;
+        } else {
+            throw new Exception("Tried to use getLoggedUserPerm() function while no user was logged-in.");
+        }
     }
 }

@@ -49,7 +49,7 @@ class PaillardesModule extends Module
         foreach ($paillardes as $p) {
             $a = "";
             foreach ($this->paillardesTable->getAuthors($p->pk_id) as $au) {
-                $a .= $au->surnom . ', ';
+                $a .= '<a href="' . $this->router->generateUri('profile.show', ['id' => $au->pk_id]) . '" class="linktoprofile">' . $au->surnom . '</a>, ';
             }
             $authors[$p->pk_id] = substr($a, 0, -2);
             $originals[$p->pk_id] = $this->paillardesTable->getOriginal($p);
@@ -70,7 +70,7 @@ class PaillardesModule extends Module
 
         $a = "";
         foreach ($this->paillardesTable->getAuthors($p) as $au) {
-            $a .= $au->surnom . ', ';
+            $a .= '<a href="' . $this->router->generateUri('profile.show', ['id' => $au->pk_id]) . '" class="linktoprofile">' . $au->surnom . '</a>, ';
         }
         $authors = substr($a, 0, -2);
 

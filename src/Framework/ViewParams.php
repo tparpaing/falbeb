@@ -37,7 +37,8 @@ class ViewParams
                 'scripts' => null,
                 'styles' => null,
                 'custom_style' => '',
-                'style_strict' => false
+                'style_strict' => false,
+                'script_strict' => false
             ];
         } else {
             $this->defaultKeys = $defaultKeys;

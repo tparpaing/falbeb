@@ -8,6 +8,7 @@ use App\Admin\AdminModule;
 use App\Auth\AuthModule;
 use App\Contact\ContactModule;
 use App\Paillardes\PaillardesModule;
+use App\Profile\ProfileModule;
 use App\Tree\TreeModule;
 
 use function \Http\Response\send;
@@ -18,17 +19,34 @@ $whoops = new Run;
 $whoops->pushHandler(new PrettyPageHandler);
 $whoops->register();
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['auth'])) {
+    $_SESSION['auth'] = null;
+}
+
 $modules = [
     '@admin' => [
         'src' => AdminModule::class,
+        'constraints' => [
+            'perms' => 'admin',
+            'login' => true
+        ],
         'displayName' => 'Administration'
     ],
     '@tree' => [
         'src' => TreeModule::class,
+        'constraints' => [
+            'login' => true
+        ],
         'displayName' => 'Arbre'
     ],
     '@paillardes' => [
         'src' => PaillardesModule::class,
+        'constraints' => [
+            'login' => true
+        ],
         'displayName' => 'Paillardes'
     ],
     '@contact' => ContactModule::class,
@@ -36,6 +54,13 @@ $modules = [
         'src' => AuthModule::class,
         'baseRoute' => 'login',
         'displayName' => 'Se connecter'
+    ],
+    '@profile' => [
+        'src' => ProfileModule::class,
+        'constraints' => [
+            'login' => true
+        ],
+        'displayName' => 'Mon profil'
     ]
 ];
 
@@ -44,10 +69,17 @@ $builder->addDefinitions(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIR
 
 foreach ($modules as $m) {
     if (is_array($m)) {
+        $constraints = $m['constraints'] ?? [];
         $m = $m['src'];
+    } else {
+        $constraints = [];
     }
-    if (!is_null($m::DEFINITIONS)) {
-        $builder->addDefinitions($m::DEFINITIONS);
+    
+    if (App::verifyConstraints($constraints)) {
+        
+        if (!is_null($m::DEFINITIONS)) {
+            $builder->addDefinitions($m::DEFINITIONS);
+        }
     }
 }
 
