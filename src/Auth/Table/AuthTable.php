@@ -18,13 +18,12 @@ class AuthTable
         $this->pdo = $pdo;
     }
 
-    public function find(string $email, string $password): ?stdClass
+    public function find(string $username, string $password): ?stdClass
     {
-        $id = $this->validateUserLogin($email, $password);
+        $id = $this->validateUserLogin($username, $password);
         if ($id != null) {
             $req = $this->pdo->prepare('SELECT
                 users.pk_id as id,
-                users.email,
                 users.login,
                 users.role,
                 users.fk_membre,
@@ -52,14 +51,14 @@ class AuthTable
     /**
      * Retourne l'id du membre si la combinaison login/password est correcte, retourne null sinon
      * 
-     * @param string $email L'adresse e-mail
+     * @param string $username L'identifiant
      * @param string $password Le mot de passe
      * @return null|int L'id du membre si correct, null sinon
      */
-    private function validateUserLogin(string $email, string $password): ?int
+    private function validateUserLogin(string $username, string $password): ?int
     {
-        $req = $this->pdo->prepare('SELECT pk_id,password FROM users WHERE email = ?');
-        $req->execute([$email]);
+        $req = $this->pdo->prepare('SELECT pk_id,password FROM users WHERE login = ?');
+        $req->execute([$username]);
         if ($req->rowCount() === 1) {
             $res = $req->fetch();
             if (password_verify($password, $res->password)) {

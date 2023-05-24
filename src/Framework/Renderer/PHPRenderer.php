@@ -2,6 +2,8 @@
 
 namespace Framework\Renderer;
 
+use Framework\App;
+
 class PHPRenderer implements RendererInterface
 {
 
@@ -55,7 +57,7 @@ class PHPRenderer implements RendererInterface
             $params['displayTitle'] = "Faluchologie de la <span>Bite en Bois</span>";
         } else {
             $params['displayTitle'] = $this->getDisplayTitle($params['title']);
-            $params['title'] = $params['title'] . ' | ';
+            $params['title'] = $this->getTitle($params['title']) . ' | ';
         }
 
         if ($this->hasNamespace($view)) {
@@ -122,9 +124,36 @@ class PHPRenderer implements RendererInterface
      */
     private function getDisplayTitle(string $title): string
     {
-        $words = explode(' ', $title);
-        $last_word = array_pop($words);
-        $first_words = implode(' ', $words);
-        return $first_words . ' <span>' . ucfirst(trim($last_word)) . '</span>';
+        $matches = [];
+
+        preg_match('/(.+){(.+)}/', $title, $matches);
+
+        if (!empty($matches)) {
+            return $matches[1] . ' <span>' . ucfirst(trim($matches[2])) . '</span>';
+        } else {
+            $words = explode(' ', $title);
+            $last_word = array_pop($words);
+            $first_words = implode(' ', $words);
+            return $first_words . ' <span>' . ucfirst(trim($last_word)) . '</span>';
+        }
+    }
+
+    /**
+     * Retourne le titre de la page
+     * 
+     * @param string $title Le titre
+     * @return string Le titre modifié
+     */
+    private function getTitle(string $title): string
+    {
+        $matches = [];
+
+        preg_match('/(.+){(.+)}/', $title, $matches);
+
+        if (!empty($matches)) {
+            return $matches[1] . ucfirst(trim($matches[2]));
+        } else {
+            return $title;
+        }
     }
 }

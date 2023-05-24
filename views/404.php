@@ -225,7 +225,7 @@ echo $renderer->render(
 </svg>
 <div class="content">
     <h3>Hmmm...</h3>
-    <p>On dirait qu'un développeur s'est endormi en codant cette page car elle n'a pas trouvée... C'est un mauvais <span class="stroke">lien</span>&nbsp;rêve !</p>
+    <p>On dirait qu'un développeur s'est endormi en codant cette page car elle n'a pas été trouvée... C'est un mauvais <span class="stroke">lien</span>&nbsp;rêve !</p>
     <p>
         <a class="link" href="<?= $router->generateUri('index') ?>">Retourner à l'accueil</a>
         <?php if ($nearestPage !== null) : ?>

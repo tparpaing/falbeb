@@ -44,15 +44,15 @@ class AuthModule extends Module
     public function login(array $params, ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $success = false;
-        $user = null;
+        $user = null;                
         if ($request->getMethod() === "POST" && !App::loggedIn()) {
             $post = $request->getParsedBody();
             $errors = [];
 
-            if ($this->validateEmail($post['email'])) {
-                $email = htmlentities($post['email']);
+            if ($this->validateUsername($post['username'])) {
+                $username = htmlentities($post['username']);
             } else {
-                $errors['email'] = 'L\'adresse e-mail renseignée est invalide';
+                $errors['username'] = 'L\'identifiant renseigné est invalide';
             }
 
             $valPwd = $this->validatePassword($post['password']);
@@ -76,7 +76,7 @@ class AuthModule extends Module
 
 
             if (empty($errors)) {
-                $user = $this->authTable->find($email, $password);
+                $user = $this->authTable->find($username, $password);
                 if ($user != null) {
                     $_SESSION['auth'] = $user;
                     $success = true;
@@ -87,19 +87,31 @@ class AuthModule extends Module
         $this->renderer->addGlobal('user', $user);
         $this->renderer->addGlobal('success', $success);
         $this->renderer->addGlobal('errors', $errors ?? []);
-        if (!isset($email) || empty($errors)) {
-            $this->renderer->addGlobal('email', '');
+        if (!isset($username) || empty($errors)) {
+            $this->renderer->addGlobal('username', '');
         } else {
-            $this->renderer->addGlobal('email', $email);
+            $this->renderer->addGlobal('username', $username);
         }
 
         $response = $handler->handle($request);
+        
         if ($success) {
             return $response
-                ->withStatus(200)
-                ->withHeader('Location', $this->router->generateUri('profile.index'));
+                ->withHeader('Location', $this->router->generateUri('auth.redirect', ['route' => 'profile-index']));
         }
+
         return $response;
+    }
+
+    public function redirect(array $params, ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $route = str_replace('-', '.', substr($request->getServerParams()['REQUEST_URI'],10));
+
+        $response = $handler->handle($request);
+
+        return $response
+            ->withStatus(303)
+            ->withHeader('Location', $this->router->generateUri($route));
     }
 
     public function register(array $params, ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -134,11 +146,12 @@ class AuthModule extends Module
      * @param string $email
      * @return bool
      */
-    private function validateEmail($email): bool
+    private function validateUsername($username): bool
     {
-        if (isset($email) && !empty($email)) {
-            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-            return (filter_var($email, FILTER_VALIDATE_EMAIL));
+        if (isset($username) && !empty($username)) {
+            $matches = [];
+            preg_match('/[a-z].[a-z]+/', $username, $matches);
+            return (!empty($matches));
         }
         return false;
     }

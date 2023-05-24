@@ -137,12 +137,12 @@ echo $renderer->render(
         </div>
     </div>
 
-    <div class="inputGroup inputGroup1 <?php if (!empty($email)) : ?>focusWithText<?php endif; ?>">
-        <label for="loginEmail" id="loginEmailLabel">Adresse E-mail</label>
-        <input type="email" name="email" id="loginEmail" value="<?= $email ?>" maxlength="255" required />
-        <p class="helper helper1">john.doe@exemple.org</p>
-        <?php if (isset($errors['email']) && !empty($errors['email'])) : ?>
-            <p class="error"><?= $errors['email'] ?></p>
+    <div class="inputGroup inputGroup1 <?php if (!empty($username)) : ?>focusWithText<?php endif; ?>">
+        <label for="loginEmail" id="loginEmailLabel">Identifiant</label>
+        <input type="text" name="username" id="loginEmail" value="<?= $username ?>" maxlength="255" required />
+        <p class="helper helper1">j.doe</p>
+        <?php if (isset($errors['username']) && !empty($errors['username'])) : ?>
+            <p class="error"><?= $errors['username'] ?></p>
         <?php endif; ?>
     </div>
     <div class="inputGroup inputGroup2">

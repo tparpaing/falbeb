@@ -135,21 +135,26 @@ class App
      */
     public static function verifyConstraints(array $constraints): bool
     {
-        $acc = true;
+        $acc = [
+            'login' => true,
+            'perms' => true
+        ];
+
         foreach ($constraints as $k => $c) {
             if ($k === 'login' && $c) {
-                $acc = self::loggedIn();
+                $acc['login'] = self::loggedIn();
                 continue;
             }
             
             if ($k === 'perms') {
                 if (self::loggedIn()) {
-                    $acc = (self::getLoggedUserPerm() === $c);
+                    $acc['perms'] = (self::getLoggedUserPerm() === $c);
                 }
                 continue;
             }
         }
-        return $acc;
+
+        return $acc['login'] && $acc['perms'];
     }
 
     /**
@@ -189,6 +194,9 @@ class App
     public static function getLoggedUserPerm(): string
     {
         if (self::loggedIn()) {
+            if (is_null($_SESSION['auth']->role)) {
+                return "user";
+            }
             return $_SESSION['auth']->role;
         } else {
             throw new Exception("Tried to use getLoggedUserPerm() function while no user was logged-in.");

@@ -21,15 +21,18 @@ return [
         ],
         [
             'path' => '/login',
-            'name' => null,
-            'methods' => ['POST'],
-            'name' => 'auth.login.post'
+            'name' => 'auth.login.post',
+            'methods' => ['POST']
         ],
         [
             'path' => '/logout',
             'name' => 'auth.logout',
-            'methods' => ['GET'],
-            'name' => 'auth.logout'
+            'methods' => ['GET']
+        ],
+        [
+            'path' => '/redirect/{route:[a-z0-9-]+}',
+            'name' => 'auth.redirect',
+            'methods' => ['GET']
         ],
         [
             'path' => '/register',

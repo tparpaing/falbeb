@@ -3,6 +3,8 @@
 namespace App\Profile;
 
 //use App\Profile\Table\ProfileTable;
+
+use App\Profile\Table\ProfileTable;
 use Framework\App;
 use Framework\Module;
 use Mezzio\Router\FastRouteRouter;
@@ -27,8 +29,14 @@ class ProfileModule extends Module
      */
     private $router;
 
-    public function __construct(FastRouteRouter $router, RendererInterface $renderer)
+    /**
+     * @var ProfileTable
+     */
+    private $profileTable;
+
+    public function __construct(FastRouteRouter $router, RendererInterface $renderer, ProfileTable $profileTable)
     {
+        $this->profileTable = $profileTable;
         $this->router = $router;
         $this->renderer = $renderer;
         $this->renderer->addPath('profile', __DIR__ . DIRECTORY_SEPARATOR . 'views');
@@ -45,7 +53,12 @@ class ProfileModule extends Module
 
     public function show(array $params, ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        
+        $m = $params['id'];
+        $member = $this->profileTable->find($m);
+        $vowels = ['A','E','I','O','U','Y','a','e','i','o','u','y'];
+
+        $this->renderer->addGlobal('member', $member);
+        $this->renderer->addGlobal('VOWELS', $vowels);
 
         $response = $handler->handle($request);
         return $response;
