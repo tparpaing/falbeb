@@ -10,6 +10,7 @@ use Framework\Module;
 use Mezzio\Router\FastRouteRouter;
 use Psr\Http\Message\ResponseInterface;
 use Framework\Renderer\RendererInterface;
+use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use stdClass;
@@ -44,23 +45,27 @@ class ProfileModule extends Module
 
     public function index(array $params, ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-
         $this->renderer->addGlobal('auth', $_SESSION['auth']);
 
         $response = $handler->handle($request);
         return $response;
     }
-
+    
     public function show(array $params, ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $m = $params['id'];
+        $response = $handler->handle($request);
+
+        $m = $params['id'] ?? App::getLoggedUserId(1);
+        
         $member = $this->profileTable->find($m);
         $vowels = ['A','E','I','O','U','Y','a','e','i','o','u','y'];
-
+    
+        $this->renderer->addGlobal('pms', $this->profileTable->getPM($m));
+        $this->renderer->addGlobal('fillots', $this->profileTable->getFillots($m));
+        $this->renderer->addGlobal('adelphes', $this->profileTable->getAdelphes($m));
         $this->renderer->addGlobal('member', $member);
         $this->renderer->addGlobal('VOWELS', $vowels);
 
-        $response = $handler->handle($request);
         return $response;
     }
 }

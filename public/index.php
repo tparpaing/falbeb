@@ -57,6 +57,7 @@ $modules = [
     ],
     '@profile' => [
         'src' => ProfileModule::class,
+        'baseRoute' => 'show.index',
         'constraints' => [
             'login' => true
         ],

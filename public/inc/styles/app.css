@@ -488,3 +488,75 @@ section.cards svg {
     font-size: smaller;
     vertical-align: sub;
 }
+
+.chip_container {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: baseline;
+	align-content: flex-start;
+}
+
+.chip {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+    margin: 10px;
+    padding: 15px 20px;
+    width: fit-content;
+    background-color: #2A265F;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.chip .icon {
+    margin: 0 10px 0 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.chip .text {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.profile_container {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
+.profile_info {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+    margin: 5px 0;
+    padding: 0;
+    width: fit-content;
+}
+
+.profile_info .icon {
+    margin: 0 10px 0 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.profile_info .text {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #ffffff;
+}

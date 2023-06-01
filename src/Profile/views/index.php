@@ -1,8 +1,7 @@
-<?= $renderer->render('header', ['title' => 'Bonjour ' . $auth->prenom, 'activeTrigger' => 'profile']); ?>
+<?= $renderer->render('header', ['title' => 'Membres de la famille', 'activeTrigger' => 'profile']); ?>
 
 <section>
-    Nom : <?= $auth->nom ?><br>
-    Prénom : <?= $auth->prenom ?>
+    
 </section>
 
 <?= $renderer->render('footer'); ?>

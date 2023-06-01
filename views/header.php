@@ -33,6 +33,7 @@ $scriptStrict = $viewParams->getParam('script_strict');
     <?php endif; ?>
     <?= $styles ?>
 
+    <script src="https://kit.fontawesome.com/b26ff6aec7.js" crossorigin="anonymous"></script>
     <?php if (!$scriptStrict) : ?>
         <script type="application/javascript" src="<?= $router->generateUri('scripts') ?>/app.js" defer></script>
     <?php endif; ?>

@@ -7,8 +7,13 @@ use function DI\autowire;
 return [
     'routesToAdd' => add([
         [
-            'path' => '/profile',
+            'path' => '/profiles',
             'name' => 'profile.index',
+            'methods' => ['GET']
+        ],
+        [
+            'path' => '/profile',
+            'name' => 'profile.show.index',
             'methods' => ['GET'],
             'levenstein' => [
                 'enabled' => true,
@@ -16,7 +21,7 @@ return [
             ]
         ],
         [
-            'path' => '/profile/{id:\d+}',
+            'path' => '/profiles/{id:\d+}',
             'name' => 'profile.show',
             'methods' => ['GET']
         ]

@@ -97,7 +97,7 @@ class AuthModule extends Module
         
         if ($success) {
             return $response
-                ->withHeader('Location', $this->router->generateUri('auth.redirect', ['route' => 'profile-index']));
+                ->withHeader('Location', $this->router->generateUri('auth.redirect', ['route' => 'profile-show-index']));
         }
 
         return $response;
